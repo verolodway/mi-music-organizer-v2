@@ -82,4 +82,13 @@ public class MusicOrganizer
     {
         player.stop();
     }
+    
+    /**
+     * Método que nos muestra por pantalla el nombre de todos los archivos MP3 
+     */
+    public void listAllFiles(){
+        for (String file : files){
+            System.out.println(file);
+        }
+    }
 }
