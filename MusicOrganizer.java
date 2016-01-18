@@ -13,6 +13,8 @@ public class MusicOrganizer
     private ArrayList<String> files;
     // A player for the music files.
     private MusicPlayer player;
+    // Variable quee representa el indice 
+    private int index;
         
     /**
      * Create a MusicOrganizer
@@ -21,6 +23,7 @@ public class MusicOrganizer
     {
         files = new ArrayList<String>();
         player = new MusicPlayer();
+        index = 1;
     }
     
     /**
@@ -84,11 +87,67 @@ public class MusicOrganizer
     }
     
     /**
+     * Método que nos da el índice de la canción
+     */
+    public int getIndex(){
+        return index;
+    }
+    
+    /**
      * Método que nos muestra por pantalla el nombre de todos los archivos MP3 
      */
     public void listAllFiles(){
+        int indice;
+        indice = 1;
         for (String file : files){
-            System.out.println(file);
+            System.out.println(indice + ". " + file);
+            indice = indice + 1;
         }
+    }
+    
+    /**
+     * Método que nos permite hacer una búsqueda de ciertos archivos
+     */
+    public void listMatching(String searchString)
+    {
+        boolean resultado;
+        resultado = false;
+        
+        for (String filename : files) {
+            if (filename.contains(searchString)){
+                System.out.println(filename);
+                resultado = true;
+            }
+        }
+        
+        if (!resultado){
+            System.out.println("No hay coincidencias en la búsqueda.");
+        }
+    }
+    
+    /**
+     * Reproduce una muestra de la canción
+     */
+    public void playSamplesArtist(String artist){
+        for (String filename : files) {
+            if (filename.contains(artist)){
+                player.playSample(filename);
+            }
+        }
+    }
+    
+    /**
+     * Método que nos devuelve el índice del primer archivo que encuentre la cadena de búsqueda
+     */
+    public int findFirst(String busqueda){
+        boolean found = false;
+        while (!found && index < files.size()){
+            for (String filename : files){
+                if (busqueda.equals(filename)){
+                    return index;
+                }
+            }
+        }
+        return index;
     }
 }
