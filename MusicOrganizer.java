@@ -146,6 +146,9 @@ public class MusicOrganizer
                 if (busqueda.equals(filename)){
                     return index;
                 }
+                else {
+                    return -1;
+                }
             }
         }
         return index;
